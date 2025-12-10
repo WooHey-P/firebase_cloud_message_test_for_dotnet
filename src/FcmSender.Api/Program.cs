@@ -6,9 +6,12 @@ using FcmSender.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
+TryLoadDotEnv();
+
 var builder = WebApplication.CreateBuilder(args);
 
-TryLoadDotEnv();
+// 환경 변수를 Configuration에 추가
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddOptions<FirebaseOptions>()
     .BindConfiguration(FirebaseOptions.SectionName)

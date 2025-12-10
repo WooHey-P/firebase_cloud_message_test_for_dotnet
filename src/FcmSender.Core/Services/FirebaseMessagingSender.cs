@@ -90,6 +90,6 @@ public sealed class FirebaseMessagingSender : IFcmSender
         => new(new BaseClientService.Initializer
         {
             HttpClientInitializer = credential,
-            ApplicationName = $"FcmSender ({_options.ProjectId})"
+            ApplicationName = "FcmSender"
         });
 }
