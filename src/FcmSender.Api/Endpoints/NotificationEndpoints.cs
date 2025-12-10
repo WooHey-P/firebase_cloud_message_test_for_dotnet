@@ -106,6 +106,45 @@ public static class NotificationEndpoints
                                         ["body"] = new OpenApiString("검증 테스트입니다."),
                                         ["validateOnly"] = new OpenApiBoolean(true)
                                     }
+                                },
+                                ["플랫폼별 설정 (Android/iOS)"] = new()
+                                {
+                                    Summary = "Android/iOS 플랫폼별 설정 포함",
+                                    Description = "Android와 iOS 플랫폼별 우선순위, TTL, APNs 설정을 포함한 전체 요청 예시입니다.",
+                                    Value = new OpenApiObject
+                                    {
+                                        ["token"] = new OpenApiString("YOUR_FCM_DEVICE_TOKEN_HERE"),
+                                        ["notification"] = new OpenApiObject
+                                        {
+                                            ["title"] = new OpenApiString("알림 제목"),
+                                            ["body"] = new OpenApiString("알림 내용")
+                                        },
+                                        ["android"] = new OpenApiObject
+                                        {
+                                            ["priority"] = new OpenApiString("high"),
+                                            ["ttl"] = new OpenApiString("3600s")
+                                        },
+                                        ["apns"] = new OpenApiObject
+                                        {
+                                            ["headers"] = new OpenApiObject
+                                            {
+                                                ["apns-priority"] = new OpenApiString("10"),
+                                                ["apns-expiration"] = new OpenApiString("1702234567")
+                                            },
+                                            ["payload"] = new OpenApiObject
+                                            {
+                                                ["aps"] = new OpenApiObject
+                                                {
+                                                    ["content-available"] = new OpenApiInteger(1)
+                                                }
+                                            }
+                                        },
+                                        ["data"] = new OpenApiObject
+                                        {
+                                            ["key1"] = new OpenApiString("value1"),
+                                            ["key2"] = new OpenApiString("value2")
+                                        }
+                                    }
                                 }
                             }
                         }
