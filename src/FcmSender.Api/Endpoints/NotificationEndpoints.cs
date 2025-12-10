@@ -52,7 +52,7 @@ public static class NotificationEndpoints
                                 ["기본 (토큰 발송)"] = new()
                                 {
                                     Summary = "기본 토큰 발송",
-                                    Description = "기본 디바이스 토큰으로 알림을 발송합니다. token을 비워두면 .env의 FIREBASE__DEFAULTDEVICETOKEN이 사용됩니다.",
+                                    Description = "기본 디바이스 토큰으로 알림을 발송합니다. token을 비워두면 .env의 FIREBASE_DEFAULTDEVICETOKEN이 사용됩니다.",
                                     Value = new OpenApiObject
                                     {
                                         ["title"] = new OpenApiString("Hello from server"),

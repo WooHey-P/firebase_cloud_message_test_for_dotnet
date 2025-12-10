@@ -13,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 // 환경 변수를 Configuration에 추가
 builder.Configuration.AddEnvironmentVariables();
 
+// FIREBASE_PROJECTID, FIREBASE_DEFAULTDEVICETOKEN 환경 변수를 Firebase 섹션에 매핑
+MapFirebaseEnvironmentVariables(builder.Configuration);
+
 builder.Services.AddOptions<FirebaseOptions>()
     .BindConfiguration(FirebaseOptions.SectionName)
     .ValidateDataAnnotations()
@@ -63,5 +66,21 @@ static void TryLoadDotEnv()
     catch (FileNotFoundException)
     {
         // Ignore when .env is absent.
+    }
+}
+
+static void MapFirebaseEnvironmentVariables(IConfigurationManager configuration)
+{
+    var projectId = Environment.GetEnvironmentVariable("FIREBASE_PROJECTID");
+    var defaultDeviceToken = Environment.GetEnvironmentVariable("FIREBASE_DEFAULTDEVICETOKEN");
+
+    if (!string.IsNullOrWhiteSpace(projectId))
+    {
+        configuration[$"{FirebaseOptions.SectionName}:ProjectId"] = projectId;
+    }
+
+    if (!string.IsNullOrWhiteSpace(defaultDeviceToken))
+    {
+        configuration[$"{FirebaseOptions.SectionName}:DefaultDeviceToken"] = defaultDeviceToken;
     }
 }
