@@ -59,6 +59,47 @@ Firebase Console > Project Settings > **General** tab
 | `GOOGLE_APPLICATION_CREDENTIALS` | Yes | Path to service account JSON |
 | `FIREBASE_DEFAULTDEVICETOKEN` | No | Default FCM device token |
 
+## API Usage
+
+### Send Notification
+
+```
+POST /api/notifications/send
+Content-Type: application/json
+```
+
+### Request Example
+
+```bash
+curl -X POST http://localhost:5130/api/notifications/send \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Notification Title",
+    "body": "Notification Body",
+    "token": "DEVICE_FCM_TOKEN"
+  }'
+```
+
+### Request Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Notification title |
+| `body` | string | Notification body |
+| `token` | string | Device FCM token |
+| `topic` | string | Topic name (use instead of token) |
+| `data` | object | Custom key-value data |
+| `validateOnly` | bool | If true, validates without sending |
+
+### Response Example
+
+```json
+{
+  "messageName": "projects/my-project/messages/123456",
+  "dryRun": false
+}
+```
+
 ## Project Structure
 
 ```

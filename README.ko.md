@@ -59,6 +59,47 @@ Firebase Console > 프로젝트 설정 > **일반** 탭에서 확인
 | `GOOGLE_APPLICATION_CREDENTIALS` | O | 서비스 계정 JSON 경로 |
 | `FIREBASE_DEFAULTDEVICETOKEN` | X | 기본 FCM 토큰 |
 
+## API 사용법
+
+### 알림 발송
+
+```
+POST /api/notifications/send
+Content-Type: application/json
+```
+
+### 요청 예시
+
+```bash
+curl -X POST http://localhost:5130/api/notifications/send \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "알림 제목",
+    "body": "알림 내용",
+    "token": "디바이스_FCM_토큰"
+  }'
+```
+
+### 요청 필드
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| `title` | string | 알림 제목 |
+| `body` | string | 알림 내용 |
+| `token` | string | 디바이스 FCM 토큰 |
+| `topic` | string | 토픽명 (token 대신 사용) |
+| `data` | object | 커스텀 key-value 데이터 |
+| `validateOnly` | bool | true면 실제 발송 없이 검증만 수행 |
+
+### 응답 예시
+
+```json
+{
+  "messageName": "projects/my-project/messages/123456",
+  "dryRun": false
+}
+```
+
 ## 파일 구조
 
 ```
